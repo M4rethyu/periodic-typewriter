@@ -1,8 +1,8 @@
 import periodictable
 
-symbols = [el.symbol for el in periodictable.elements if el.symbol[0].isupper()]
 
-input_string = "python"
+symbols = [el.symbol for el in periodictable.elements if el.symbol[0].isupper()]
+elements = {element.symbol: element for element in periodictable.elements}
 
 
 def convert_word(string, element_list):
@@ -20,21 +20,28 @@ def convert_string(string):
     return converted_words
 
 
-result = convert_string(input_string)
-print(result)
-
-result_string = ""
-for rest, element_list in result:
-    result_string += "".join(element_list) + (f"({rest})" if len(rest) >= 1 else "") + " "
-print(result_string)
-
-elements = {element.symbol: element for element in periodictable.elements}
-for rest, element_list in result:
-    for el in element_list:
-        print(elements[el].name)
+def print_string(result):
+    result_string = ""
+    for rest, element_list in result:
+        result_string += "".join(element_list) + (f"({rest})" if len(rest) >= 1 else "") + " "
+    return result_string
 
 
-"""for el in periodictable.elements:
-    rest, element_list = convert_string(el.name)[0]
-    if rest == "":
-        print("".join(element_list))"""
+def print_elements(result):
+    element_string = ""
+    for rest, element_list in result:
+        for el in element_list:
+            element_string += elements[el].name + "\n"
+        element_string += "\n"
+    return element_string
+
+
+if __name__ == "__main__":
+    input_string = "python is neat"
+
+    result = convert_string(input_string)
+
+    print(print_string(result))
+    print("")
+    print(print_elements(result))
+
