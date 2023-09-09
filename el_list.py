@@ -1,5 +1,5 @@
 import periodictable
-from main import convert_string
+from parser import convert_string
 
 
 if __name__ == "__main__":
