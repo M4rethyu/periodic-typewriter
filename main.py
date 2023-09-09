@@ -37,9 +37,10 @@ def print_elements(result):
 
 
 if __name__ == "__main__":
-    input_string = "python is neat"
-
-    result = convert_string(input_string)
+    with open("input.txt") as f:
+        #input_string = "python is neat"
+        input_string = "".join(f.readlines())
+        result = convert_string(input_string)
 
     print(print_string(result))
     print("")
