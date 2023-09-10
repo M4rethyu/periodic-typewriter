@@ -1,7 +1,20 @@
+import sys, os
+
 import tkinter as tk
 from PIL import Image, ImageTk
 
 import parser
+
+
+def resource_path(relative_path):
+    """ Get absolute path to resource, works for dev and for PyInstaller """
+    try:
+        # PyInstaller creates a temp folder and stores path in _MEIPASS
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
 
 
 class PeriodicUI(tk.Tk):
@@ -9,7 +22,7 @@ class PeriodicUI(tk.Tk):
         super().__init__()
 
         self.title("Periodic Typewriter")
-        self.iconbitmap("./assets/PeriodicTypewriterIcon.ico")
+        self.iconbitmap(resource_path("assets/PeriodicTypewriterIcon.ico"))
 
         self.input_string = tk.StringVar()
         self.input_string.trace("w", self.input_callback)
@@ -53,7 +66,7 @@ class PeriodicUI(tk.Tk):
 
 class Symbol(tk.Label):
     def __init__(self, parent, symbol, size=200):
-        path = f"assets/element_icons/{symbol}.png"
+        path = resource_path(f"assets/element_icons/{symbol}.png")
         self.img = ImageTk.PhotoImage(Image.open(path).resize((size, size)))
         super().__init__(
             parent,
