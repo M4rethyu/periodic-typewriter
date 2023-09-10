@@ -21,7 +21,7 @@ class PeriodicUI(tk.Tk):
     def __init__(self):
         super().__init__()
 
-        self.title("Periodic Typewriter")
+        self.title("Periodic Typewriter - M4rethyu")
         self.iconbitmap(resource_path("assets/PeriodicTypewriterIcon.ico"))
 
         self.input_string = tk.StringVar()
