@@ -33,8 +33,12 @@ class PeriodicUI(tk.Tk):
         self.arrow = tk.Label(self, text="->", width=2)
         self.arrow.grid(row=0, column=1)
 
-        self.output_field = tk.Label(self, text="")
+        self.output_string = tk.StringVar()
+        self.output_field = tk.Entry(self, textvariable=self.output_string)
+        self.output_field.configure(state="readonly")
         self.output_field.grid(row=0, column=2)
+        #self.output_string.set("")
+
 
         self.symbol_area = tk.Frame(self, bg="#231F20")
         self.symbol_area.grid(row=1, column=0, columnspan=3, sticky='news')
@@ -51,7 +55,7 @@ class PeriodicUI(tk.Tk):
         self.update_output(parse_result)
 
     def update_output(self, result):
-        self.output_field.config(text=parser.print_string(result))
+        self.output_string.set(parser.print_string(result))
         for symbol_row in self.symbol_rows:
             symbol_row.destroy()
         self.symbol_rows = []
