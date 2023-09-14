@@ -1,9 +1,18 @@
 import periodictable
-from parser import convert_string
+from parser import parse_string
 
 
 if __name__ == "__main__":
+    sr = ""
     for el in periodictable.elements:
-        rest, element_list = convert_string(el.name)[0]
-        if rest == "":
-            print("".join(element_list))
+        s = el.name
+        r, sep, _ = parse_string(s.lower())
+        for i, w in enumerate(r):
+            if len(w) > 0:
+                p = sorted(w, key=lambda x: x.rest)[0]
+                if len(p.rest) > 0:
+                    continue
+                for sy in p:
+                    sr += sy.symbol
+                sr += "\n"
+    print(sr)
